@@ -22,8 +22,10 @@ public class Client
 	private int choice;
 	String club = "clubs.txt";
 	String agent ="agents.txt";
+	String players = "players.txt";
 	PrintWriter A;
 	PrintWriter C;
+	PrintWriter P;
 
 
 	public Client()
@@ -62,6 +64,8 @@ public class Client
 		
 		FileWriter agent = new FileWriter("agents.txt", true);
 		FileWriter club = new FileWriter("clubs.txt", true);
+		FileWriter player = new FileWriter("players.txt", true);
+
 
 		
 		try 
@@ -78,84 +82,226 @@ public class Client
 			
 			do
 			{
-				do
-				{
-					message = (String)in.readObject();
-					System.out.println(message);
-					message = console.next();
-					sendMessage(message);
-				}while(!message.equalsIgnoreCase("1")&&!message.equalsIgnoreCase("2"));
-				
-				if(message.equals("1"))
-				{
-					//printwriter object
-					A = new PrintWriter(agent, true);
-					
-					message = (String)in.readObject();
-					System.out.println(message);
-					message = console.next();
-					sendMessage(message);
-					A.append(message+" ");
-					
-					message = (String)in.readObject();
-					System.out.println(message);
-					message = console.next();
-					sendMessage(message);
-					A.append(message+" ");
-				
-					message = (String)in.readObject();
-					System.out.println(message);
-					message = console.next();
-					sendMessage(message);
-					A.append(message+" ");
-
-					A.append("\n--------------\n");
-
-					//close
-					A.flush();
-					A.close();
-				}
-			
-				else if(message.equals("2"))
-				{
-					//printwriter object
-					C = new PrintWriter(club);
-					
-					message = (String)in.readObject();
-					System.out.println(message);
-					message = console.next();
-					sendMessage(message);
-					C.append(message+" ");
-					
-					message = (String)in.readObject();
-					System.out.println(message);
-					message = console.next();
-					sendMessage(message);
-					C.append(message+" ");
-
-					message = (String)in.readObject();
-					System.out.println(message);
-					message = console.next();
-					sendMessage(message);
-					C.append(message+" ");
-
-					message = (String)in.readObject();
-					System.out.println(message);
-					message = console.next();
-					sendMessage(message);
-					C.append(message+" ");
-					
-					C.append("\n-------------------\n");
-					//close
-					C.flush();
-					C.close();
-					
-				}
-			
+				//LOGIN OR REGISTER
 				message = (String)in.readObject();
 				System.out.println(message);
 				message = console.next();
 				sendMessage(message);
+				
+				//LOGIN
+				if(message.equals("1")) {
+					message = (String)in.readObject();
+					System.out.println(message);
+					message = console.next();
+					sendMessage(message);
+					
+					//NAME
+					message = (String)in.readObject();
+					System.out.println(message);
+					message = console.next();
+					sendMessage(message);	
+					//ID
+					message = (String)in.readObject();
+					System.out.println(message);
+					message = console.next();
+					sendMessage(message);	
+				}
+
+				//REGISTER
+				else if(message.equals("2")) {	
+					do
+					{
+						//AGENT OR CLUB
+						message = (String)in.readObject();
+						System.out.println(message);
+						message = console.next();
+						sendMessage(message);
+					}while(!message.equalsIgnoreCase("1")&&!message.equalsIgnoreCase("2"));
+					
+					if(message.equals("1"))
+					{
+						//printwriter object
+						A = new PrintWriter(agent, true);
+						P = new PrintWriter(player, true);
+						
+						//NAME
+						message = (String)in.readObject();
+						System.out.println(message);
+						message = console.next();
+						sendMessage(message);
+						A.append(message+" ");
+						
+						//ID
+						message = (String)in.readObject();
+						System.out.println(message);
+						message = console.next();
+						sendMessage(message);
+						A.append(message+" ");
+					
+						//CLUB ID
+						message = (String)in.readObject();
+						System.out.println(message);
+						message = console.next();
+						sendMessage(message);
+						A.append(message+" ");
+						System.out.println("FINISHED");
+	
+	
+						A.append("\n------------------------------------------\n");
+						
+						//close
+						A.flush();
+						A.close();
+						
+						message = (String)in.readObject();
+						System.out.println(message);
+						
+						System.out.println("\n-----------------------------------------------\n");
+						
+						//Agent Options
+						message = (String)in.readObject();
+						System.out.println(message);	
+						message = console.next();
+						sendMessage(message);
+						
+							if(message.equals("1")) {
+								/* Agent OPTIONS to ADD a player
+								 * Below is all the required details
+								 * of each player.
+								 * 
+								 */
+								message = (String)in.readObject();
+								System.out.println(message);
+								message = console.next();
+								sendMessage(message);
+								P.append(message+", ");
+								
+								message = (String)in.readObject();
+								System.out.println(message);
+								message = console.next();
+								sendMessage(message);
+								P.append(message+", ");
+								
+								message = (String)in.readObject();
+								System.out.println(message);
+								message = console.next();
+								sendMessage(message);
+								P.append(message+", ");
+								
+								message = (String)in.readObject();
+								System.out.println(message);
+								message = console.next();
+								sendMessage(message);
+								P.append(message+", ");
+								
+								message = (String)in.readObject();
+								System.out.println(message);
+								message = console.next();
+								sendMessage(message);
+								P.append(message+", ");
+								
+								message = (String)in.readObject();
+								System.out.println(message);
+								message = console.next();
+								sendMessage(message);
+								P.append(message+", ");
+								
+								message = (String)in.readObject();
+								System.out.println(message);
+								message = console.next();
+								sendMessage(message);
+								P.append(message+", ");
+								
+								message = (String)in.readObject();
+								System.out.println(message);
+								message = console.next();
+								sendMessage(message);
+								P.append(message+", ");
+								
+								P.append("\n-----------------------------------------------\n");
+
+	
+								//close file - adding player details to file
+								P.flush();
+								P.close();
+							}
+							
+							else if(message.equals("2")) {
+								System.out.println("UPDATE");
+							}
+							
+							else if(message.equals("3")) {
+								System.out.println("DELETE");
+							}
+							
+					}
+				
+					else if(message.equals("2"))
+					{
+						//printwriter object
+						C = new PrintWriter(club);
+						
+						//CLUB NAME
+						message = (String)in.readObject();
+						System.out.println(message);
+						message = console.next();
+						sendMessage(message);
+						C.append(message+" ");
+						
+						//CLUB ID
+						message = (String)in.readObject();
+						System.out.println(message);
+						message = console.next();
+						sendMessage(message);
+						C.append(message+" ");
+						
+						//CLUB EMAIL
+						message = (String)in.readObject();
+						System.out.println(message);
+						message = console.next();
+						sendMessage(message);
+						C.append(message+" ");
+	
+						//CLUB FUNDS
+						message = (String)in.readObject();
+						System.out.println(message);
+						message = console.next();
+						sendMessage(message);
+						C.append(message+" ");
+						System.out.println("FINISHED");
+						
+						C.append("\n-----------------------------------------------\n");
+						//close
+						C.flush();
+						C.close();
+						
+						message = (String)in.readObject();
+						System.out.println(message);
+						
+						System.out.println("\n-----------------------------------------------\n");
+						
+						//Club Options
+						message = (String)in.readObject();
+						System.out.println(message);	
+						message = console.next();
+						sendMessage(message);
+						
+							if(message.equals("1")) {
+								//Club OPTIONS to search a player by ID
+								message = (String)in.readObject();
+								System.out.println(message);
+								message = console.next();
+								sendMessage(message);		
+							}
+					}
+				}
+			
+	
+				
+				//TERMINATE OPTIONS
+//				System.out.println("Do you wish to continue ? (Y/N)");
+//				message = console.next();
+//				sendMessage(message);
 				
 			}while(message.equalsIgnoreCase("Y"));
 			

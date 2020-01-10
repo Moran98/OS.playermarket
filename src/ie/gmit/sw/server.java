@@ -48,20 +48,29 @@ class Connecthandler extends Thread
 	ObjectOutputStream out;
 	ObjectInputStream in;
 	String cName;
+	String name;
 	String cID;
 	String cEmail;
 	String funds;
 	String message;
+	String option;
 	String email;
-	String name;
 	String agentID;
-	int result;
-	
-	
+	String pName;
+	String pAge;
+	String pID;
+	String valuation;
+	String status;
+	String position;
+		
 	public Connecthandler(Socket s, int i)
 	{
 		individualconnection = s;
 		socketid = i;
+	}
+	
+	public void addPlayer() {
+		System.out.println("ADD PLAYER");
 	}
 	
 	void sendMessage(String msg)
@@ -91,53 +100,135 @@ class Connecthandler extends Thread
 			//Commence
 			do 
 			{
-			
-				do
-				{
-					sendMessage("Please Enter 1 to for AGENT and 2 for CLUB");
-					message = (String)in.readObject();
-				}while(!message.equals("1")&&!message.equals("2"));
-			
-				if(message.equals("1"))
-				{
-					result = 0;
-					
-					sendMessage("Enter Agent's Name :");
-					message = (String)in.readObject();
-//					result += Integer.parseInt(message);
-					
-					sendMessage("Enter the AgentID : ");
-					agentID = (String)in.readObject();
-					
-					sendMessage("Enter Agent Email : ");
-					email = (String)in.readObject();
-				
-					sendMessage("The Agent name is "+message + " ,The Agent email is "+email +" ,The Agent ID is "+agentID);			
-				}
-			
-				else if(message.equals("2"))
-				{
-					sendMessage("Enter the Clubs name : ");
-					cName = (String)in.readObject();
-					
-					sendMessage("Enter the Clubs ID : ");
-					cID = (String)in.readObject();
-
-					sendMessage("Enter the Clubs Email : ");
-					cEmail = (String)in.readObject();
-					
-					sendMessage("Enter the Clubs Funds : ");
-					funds = (String)in.readObject();
-					
-					sendMessage("The Club's name is " +cName + " ,The Club email is "+cEmail +" ,The Club ID is "+cID +" ,The Clubs funds are : "+funds);			
-
-	
-				}
-			
-			
-				sendMessage("Y to repeat or N to terminate");
-			
+				sendMessage("Please Enter 1 to LOGIN and 2 to REGISTER");
 				message = (String)in.readObject();
+				
+				//LOGIN
+				if(message.equals("1")) {
+					do
+					{
+						sendMessage("Please Enter 1 to for AGENT and 2 for CLUB");
+						message = (String)in.readObject();
+					}while(!message.equals("1")&&!message.equals("2"));
+					
+					if(message.equals("1")) {
+						sendMessage("Enter Agent's Name :");
+						name = (String)in.readObject();
+						
+						sendMessage("Enter the AgentID : ");
+						agentID = (String)in.readObject();
+					}
+					else if(message.equals("2")) {
+						sendMessage("Enter Club's Name :");
+						name = (String)in.readObject();
+						
+						sendMessage("Enter the Club's ID : ");
+						agentID = (String)in.readObject();
+					}
+				
+				}
+				
+				//REGISTER
+				else if(message.equals("2")) {
+					do
+					{
+						sendMessage("Please Enter 1 to for AGENT and 2 for CLUB");
+						message = (String)in.readObject();
+					}while(!message.equals("1")&&!message.equals("2"));
+				
+					if(message.equals("1"))
+					{					
+						sendMessage("Enter Agent's Name :");
+						name = (String)in.readObject();
+						
+						sendMessage("Enter the Agent'S ID : ");
+						agentID = (String)in.readObject();
+						
+						sendMessage("Enter Agent Email : ");
+						email = (String)in.readObject();
+					
+						sendMessage("The Agent name is "+name + " ,The Agent email is "+email +" ,The Agent ID is "+agentID);	
+						
+						sendMessage("Do you wish to do the following :\n1) Add Player\n2) Update Player\n3) Delete Player");
+						option = (String)in.readObject();
+						
+						//ADD PLAYER
+						if(option.equals("1")) {						
+							sendMessage("Enter Player's Name :");
+							pName = (String)in.readObject();
+							
+							sendMessage("Enter the Player's Age :");
+							pAge = (String)in.readObject();
+							
+							sendMessage("Enter Player's ID : ");
+							pID = (String)in.readObject();
+							
+							sendMessage("Enter Club's ID : ");
+							cID = (String)in.readObject();
+							
+							sendMessage("Enter Agent's ID : ");
+							agentID = (String)in.readObject();
+							
+							sendMessage("Enter Player's Valuation : ");
+							valuation = (String)in.readObject();
+							
+							sendMessage("Enter Player's Status : ");
+							status = (String)in.readObject();
+							
+							sendMessage("Enter Player's Position : ");
+							position = (String)in.readObject();
+						}
+						else if(option.equals("2")) {
+							sendMessage("Update Player");
+						}
+						else if(option.equals("3")) {
+							sendMessage("Delete Player");
+						}
+						
+					}
+				
+					else if(message.equals("2"))
+					{
+						sendMessage("Enter the Clubs name : ");
+						cName = (String)in.readObject();
+						
+						sendMessage("Enter the Clubs ID : ");
+						cID = (String)in.readObject();
+	
+						sendMessage("Enter the Clubs Email : ");
+						cEmail = (String)in.readObject();
+						
+						sendMessage("Enter the Clubs Funds : ");
+						funds = (String)in.readObject();
+						
+						sendMessage("The Club's name is " +cName + " ,The Club email is "+cEmail +" ,The Club ID is "+cID +" ,The Clubs funds are : "+funds);			
+	
+						sendMessage("Do you wish to do the following :\n1) Search Player by position\n2) Search for player for sale in your club\n3) Suspend/Resume sale of Player\n4) Purchase a Player");
+						option = (String)in.readObject();
+	
+						if(option.equals("1")) {
+							sendMessage("Enter player ID you wish to SEARCH :");
+							pID = (String)in.readObject();
+	
+						}
+						
+						else if(option.equals("2")) {
+							sendMessage("Enter Club ID of the player you wish to SEARCH:");
+						}
+						
+						else if(option.equals("3")) {
+							sendMessage("Enter player ID you wish to SUSPEND/RESUME:");
+						}
+						
+						else if(option.equals("4")) {
+							sendMessage("Enter player ID you wish to PURCHASE:");
+						}
+		
+					}
+				}
+				
+//				sendMessage("Y to repeat or N to terminate");
+//				message = (String)in.readObject();
 			}while(message.equalsIgnoreCase("Y"));
 		
 		}
