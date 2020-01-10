@@ -1,6 +1,8 @@
 package ie.gmit.sw;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -58,15 +60,17 @@ public class Client
 			Client temp = new Client();
 			temp.clientapp();
 	}
+	
+	public void readFile() {
+		
+	}
 
 	public void clientapp() throws IOException
 	{
-		
+		//File Objects
 		FileWriter agent = new FileWriter("agents.txt", true);
 		FileWriter club = new FileWriter("clubs.txt", true);
 		FileWriter player = new FileWriter("players.txt", true);
-
-
 		
 		try 
 		{
@@ -212,11 +216,12 @@ public class Client
 								sendMessage(message);
 								P.append(message+", ");
 								
+								//POSITION
 								message = (String)in.readObject();
 								System.out.println(message);
 								message = console.next();
 								sendMessage(message);
-								P.append(message+", ");
+								P.append("Position : " +message);
 								
 								P.append("\n-----------------------------------------------\n");
 
@@ -270,7 +275,7 @@ public class Client
 						C.append(message+" ");
 						System.out.println("FINISHED");
 						
-						C.append("\n-----------------------------------------------\n");
+						C.append("\n------------------------------------------------------------\n");
 						//close
 						C.flush();
 						C.close();
@@ -278,7 +283,7 @@ public class Client
 						message = (String)in.readObject();
 						System.out.println(message);
 						
-						System.out.println("\n-----------------------------------------------\n");
+						System.out.println("\n--------------------------------------------------------------------------------------\n");
 						
 						//Club Options
 						message = (String)in.readObject();
@@ -287,7 +292,24 @@ public class Client
 						sendMessage(message);
 						
 							if(message.equals("1")) {
-								//Club OPTIONS to search a player by ID
+								//Club OPTIONS to search a player by POSITION
+								message = (String)in.readObject();
+								System.out.println(message);
+								message = console.next();
+								sendMessage(message);		
+							}
+							else if(message.equals("2")) {
+								//Club OPTIONS to search players for sale from their CLUB
+							}
+							else if(message.equals("3")) {
+								//Club OPTIONS to SUSPEND/RESUME player from Club
+								message = (String)in.readObject();
+								System.out.println(message);
+								message = console.next();
+								sendMessage(message);		
+							}
+							else if(message.equals("4")) {
+								//Club OPTIONS to DELETE a player from CLUBS
 								message = (String)in.readObject();
 								System.out.println(message);
 								message = console.next();

@@ -175,15 +175,17 @@ class Connecthandler extends Thread
 							sendMessage("Enter Player's Status : ");
 							status = (String)in.readObject();
 							
-							sendMessage("Enter Player's Position : ");
+							sendMessage("Choose the Player's Position : \n 1)GOALKEEPER \n 2)DEFENDER \n 3)MIDFIELDER \n 4)FORWARD");
 							position = (String)in.readObject();
 						}
 						else if(option.equals("2")) {
-							sendMessage("Update Player");
+							sendMessage("Enter Player's ID that you wish to UPDATE : ");
+							pID = (String)in.readObject();
+							
 						}
 						else if(option.equals("3")) {
-							sendMessage("Delete Player");
-						}
+							sendMessage("Enter Player's ID that you wish to DELETE : ");
+							pID = (String)in.readObject();						}
 						
 					}
 				
@@ -203,25 +205,26 @@ class Connecthandler extends Thread
 						
 						sendMessage("The Club's name is " +cName + " ,The Club email is "+cEmail +" ,The Club ID is "+cID +" ,The Clubs funds are : "+funds);			
 	
-						sendMessage("Do you wish to do the following :\n1) Search Player by position\n2) Search for player for sale in your club\n3) Suspend/Resume sale of Player\n4) Purchase a Player");
+						sendMessage("Do you wish to do the following :\n 1) Search Player by position\n 2) Search for player for sale in your club\n 3) Suspend/Resume sale of Player\n 4) Purchase a Player");
 						option = (String)in.readObject();
 	
 						if(option.equals("1")) {
-							sendMessage("Enter player ID you wish to SEARCH :");
-							pID = (String)in.readObject();
-	
+							sendMessage("Enter player's Position you wish to SEARCH : \n 1)GOALKEEPER \n 2)DEFENDER \n 3)MIDFIELDER \n 4)FORWARD");
+							position = (String)in.readObject();
 						}
 						
 						else if(option.equals("2")) {
-							sendMessage("Enter Club ID of the player you wish to SEARCH:");
+							sendMessage("DISPLAY PLAYERS FOR SALE");
 						}
 						
 						else if(option.equals("3")) {
-							sendMessage("Enter player ID you wish to SUSPEND/RESUME:");
+							sendMessage("Enter player ID you wish to SUSPEND/RESUME :");
+							pID = (String)in.readObject();
 						}
 						
 						else if(option.equals("4")) {
-							sendMessage("Enter player ID you wish to PURCHASE:");
+							sendMessage("Enter player ID you wish to PURCHASE :");
+							pID = (String)in.readObject();
 						}
 		
 					}
