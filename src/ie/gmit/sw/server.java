@@ -73,6 +73,14 @@ class Connecthandler extends Thread
 		System.out.println("ADD PLAYER");
 	}
 	
+	public void clubOption() {
+		sendMessage("Do you wish to do the following :\n 1) Search Player by position\n 2) Search for player for sale in your club\n 3) Suspend/Resume sale of Player\n 4) Purchase a Player");	
+	}
+	
+	public void agentOption() {
+		sendMessage("Do you wish to do the following :\n1) Add Player\n2) Update Player\n3) Delete Player");
+	}
+	
 	void sendMessage(String msg)
 	{
 		try{
@@ -117,6 +125,48 @@ class Connecthandler extends Thread
 						
 						sendMessage("Enter the AgentID : ");
 						agentID = (String)in.readObject();
+						
+						//VERIFY - TODO
+						
+						agentOption();
+						option = (String)in.readObject();
+						//ADD PLAYER
+						if(option.equals("1")) {						
+							sendMessage("Enter Player's Name :");
+							pName = (String)in.readObject();
+							
+							sendMessage("Enter the Player's Age :");
+							pAge = (String)in.readObject();
+							
+							sendMessage("Enter Player's ID : ");
+							pID = (String)in.readObject();
+							
+							sendMessage("Enter Club's ID : ");
+							cID = (String)in.readObject();
+							
+							sendMessage("Enter Agent's ID : ");
+							agentID = (String)in.readObject();
+							
+							sendMessage("Enter Player's Valuation : ");
+							valuation = (String)in.readObject();
+							
+							sendMessage("Enter Player's Status : ");
+							status = (String)in.readObject();
+							
+							sendMessage("Choose the Player's Position : \n 1)GOALKEEPER \n 2)DEFENDER \n 3)MIDFIELDER \n 4)FORWARD");
+							position = (String)in.readObject();
+						}
+						
+						//UPDATE PLAYER
+						if(option.equals("2")) {						
+							sendMessage("UPDATE PLAYER");
+						}
+						
+						//DELETE PLAYER
+						if(option.equals("3")) {						
+							sendMessage("DELETE PLAYER");
+						}
+
 					}
 					else if(message.equals("2")) {
 						sendMessage("Enter Club's Name :");
@@ -124,7 +174,26 @@ class Connecthandler extends Thread
 						
 						sendMessage("Enter the Club's ID : ");
 						agentID = (String)in.readObject();
+						
+						//VERIFY 
+						
+						clubOption();
+						option = (String)in.readObject();
+						
+						//PLAYER SEARCH - Position
+						if(option.equals("1")) {
+							sendMessage("Enter player's Position you wish to SEARCH : \n 1)GOALKEEPER \n 2)DEFENDER \n 3)MIDFIELDER \n 4)FORWARD");
+							position = (String)in.readObject();
+						}
+						
+						//DISPLAY PLAYERS
+						if(option.equals("2")) {
+							sendMessage("DISPLAY PLAYERS FOR SALE");
+						}
+
 					}
+					
+					
 				
 				}
 				
@@ -135,7 +204,8 @@ class Connecthandler extends Thread
 						sendMessage("Please Enter 1 to for AGENT and 2 for CLUB");
 						message = (String)in.readObject();
 					}while(!message.equals("1")&&!message.equals("2"));
-				
+					
+					//register - agent
 					if(message.equals("1"))
 					{					
 						sendMessage("Enter Agent's Name :");
@@ -146,10 +216,8 @@ class Connecthandler extends Thread
 						
 						sendMessage("Enter Agent Email : ");
 						email = (String)in.readObject();
-					
-						sendMessage("The Agent name is "+name + " ,The Agent email is "+email +" ,The Agent ID is "+agentID);	
-						
-						sendMessage("Do you wish to do the following :\n1) Add Player\n2) Update Player\n3) Delete Player");
+									
+						agentOption();
 						option = (String)in.readObject();
 						
 						//ADD PLAYER
@@ -188,7 +256,8 @@ class Connecthandler extends Thread
 							pID = (String)in.readObject();						}
 						
 					}
-				
+					
+					//register - club
 					else if(message.equals("2"))
 					{
 						sendMessage("Enter the Clubs name : ");
@@ -202,10 +271,8 @@ class Connecthandler extends Thread
 						
 						sendMessage("Enter the Clubs Funds : ");
 						funds = (String)in.readObject();
-						
-						sendMessage("The Club's name is " +cName + " ,The Club email is "+cEmail +" ,The Club ID is "+cID +" ,The Clubs funds are : "+funds);			
-	
-						sendMessage("Do you wish to do the following :\n 1) Search Player by position\n 2) Search for player for sale in your club\n 3) Suspend/Resume sale of Player\n 4) Purchase a Player");
+							
+						clubOption();
 						option = (String)in.readObject();
 	
 						if(option.equals("1")) {
@@ -230,8 +297,8 @@ class Connecthandler extends Thread
 					}
 				}
 				
-//				sendMessage("Y to repeat or N to terminate");
-//				message = (String)in.readObject();
+				//TERMINATE
+				message = (String)in.readObject();
 			}while(message.equalsIgnoreCase("Y"));
 		
 		}

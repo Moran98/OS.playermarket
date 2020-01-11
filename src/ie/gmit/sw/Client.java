@@ -21,13 +21,14 @@ public class Client
 	private  int portaddress;
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
-	private int choice;
 	String club = "clubs.txt";
 	String agent ="agents.txt";
 	String players = "players.txt";
 	PrintWriter A;
 	PrintWriter C;
 	PrintWriter P;
+	PrintWriter P1;
+
 
 
 	public Client()
@@ -61,9 +62,7 @@ public class Client
 			temp.clientapp();
 	}
 	
-	public void readFile() {
-		
-	}
+
 
 	public void clientapp() throws IOException
 	{
@@ -71,6 +70,9 @@ public class Client
 		FileWriter agent = new FileWriter("agents.txt", true);
 		FileWriter club = new FileWriter("clubs.txt", true);
 		FileWriter player = new FileWriter("players.txt", true);
+		FileReader fr = new FileReader("players.txt"); 
+		FileReader fr2 = new FileReader("players.txt"); 
+
 		
 		try 
 		{
@@ -80,10 +82,7 @@ public class Client
 			out.flush();
 			in = new ObjectInputStream(connection.getInputStream());
 			System.out.println("Client Side ready to communicate");
-		
-		
-		    /// Client App.
-			
+					
 			do
 			{
 				//LOGIN OR REGISTER
@@ -92,7 +91,7 @@ public class Client
 				message = console.next();
 				sendMessage(message);
 				
-				//LOGIN
+				//LOGIN - Agent
 				if(message.equals("1")) {
 					message = (String)in.readObject();
 					System.out.println(message);
@@ -109,6 +108,145 @@ public class Client
 					System.out.println(message);
 					message = console.next();
 					sendMessage(message);	
+					
+					//VERIFY LOGIN - TODO 
+					
+					System.out.println("\n----------------------------------------------------------------------------------------------------------------------------------------\n");
+					//Agent Options
+					message = (String)in.readObject();
+					System.out.println(message);	
+					message = console.next();
+					sendMessage(message);
+					
+					if(message.equals("1")) {
+						/*
+						 * Add Player 
+						 */
+						P1 = new PrintWriter(player, true);
+
+						//NAME
+						message = (String)in.readObject();
+						System.out.println(message);
+						message = console.next();
+						sendMessage(message);
+						P1.append("Name : " +message+", ");
+						
+						//AGE
+						message = (String)in.readObject();
+						System.out.println(message);
+						message = console.next();
+						sendMessage(message);
+						P1.append("Age : "+message+", ");
+						
+						//Player ID
+						message = (String)in.readObject();
+						System.out.println(message);
+						message = console.next();
+						sendMessage(message);
+						P1.append("Player ID : "+message+", ");
+						
+						//CLUB ID
+						message = (String)in.readObject();
+						System.out.println(message);
+						message = console.next();
+						sendMessage(message);
+						P1.append("Club ID : "+message+", ");
+						
+						//AGENT ID
+						message = (String)in.readObject();
+						System.out.println(message);
+						message = console.next();
+						sendMessage(message);
+						P1.append("Agent ID : " +message+", ");
+						
+						//VALUATION
+						message = (String)in.readObject();
+						System.out.println(message);
+						message = console.next();
+						sendMessage(message);
+						P1.append("Value : "+message+", ");
+						
+						//STATUS
+						message = (String)in.readObject();
+						System.out.println(message);
+						message = console.next();
+						sendMessage(message);
+						P1.append("Status : " +message+", ");
+						
+						//POSITION
+						message = (String)in.readObject();
+						System.out.println(message);
+						message = console.next();
+						sendMessage(message);
+						P1.append("Position : " +message);
+						
+						P1.append("\n----------------------------------------------------------------------------------------------------------------------------------------\n");
+						
+						//close file - adding player details to file
+						P1.flush();
+						P1.close();
+						
+						System.out.println("\n----------------------------------------------------------------------------------------------------------------------------------------\n");
+					}
+					
+					else if(message.equals("2")) {
+						message = (String)in.readObject();
+						System.out.println(message);
+					}
+					
+					else if(message.equals("3")) {
+						message = (String)in.readObject();
+						System.out.println(message);
+					}
+				}
+				
+				//LOGIN -Club
+				else if(message.equals("2")) {
+					message = (String)in.readObject();
+					System.out.println(message);
+					message = console.next();
+					sendMessage(message);
+					
+					//NAME
+					message = (String)in.readObject();
+					System.out.println(message);
+					message = console.next();
+					sendMessage(message);	
+					//ID
+					message = (String)in.readObject();
+					System.out.println(message);
+					message = console.next();
+					sendMessage(message);	
+					
+					//VERIFY LOGIN - TODO 
+					
+					System.out.println("\n----------------------------------------------------------------------------------------------------------------------------------------\n");
+					//Club Options
+					message = (String)in.readObject();
+					System.out.println(message);	
+					message = console.next();
+					sendMessage(message);
+					
+					//Search player by POSITION
+					if(message.equals("1")) {
+						System.out.println("SEARCH POSITION");
+					}
+					
+					else if(message.equals("2")) {
+						//Club OPTIONS to search players for sale from their CLUB
+					    int i; 
+					    while ((i=fr2.read()) != -1) {
+					      System.out.print((char) i);
+					    }//while
+					}
+					
+					else if(message.equals("3")) {
+						System.out.println("SUSPEND / RESUME PLAYER");
+					}
+					
+					else if(message.equals("4")) {
+						System.out.println("PURCHASE PLAYER");
+					}
 				}
 
 				//REGISTER
@@ -151,7 +289,7 @@ public class Client
 						System.out.println("FINISHED");
 	
 	
-						A.append("\n------------------------------------------\n");
+						A.append("\n----------------------------------------------------------------------------------------------------------------------------------------\n");
 						
 						//close
 						A.flush();
@@ -160,7 +298,7 @@ public class Client
 						message = (String)in.readObject();
 						System.out.println(message);
 						
-						System.out.println("\n-----------------------------------------------\n");
+						System.out.println("\n----------------------------------------------------------------------------------------------------------------------------------------\n");
 						
 						//Agent Options
 						message = (String)in.readObject();
@@ -169,7 +307,8 @@ public class Client
 						sendMessage(message);
 						
 							if(message.equals("1")) {
-								/* Agent OPTIONS to ADD a player
+								/* 
+								 * Agent OPTIONS to ADD a player
 								 * Below is all the required details
 								 * of each player.
 								 * 
@@ -223,7 +362,7 @@ public class Client
 								sendMessage(message);
 								P.append("Position : " +message);
 								
-								P.append("\n-----------------------------------------------\n");
+								P.append("\n----------------------------------------------------------------------------------------------------------------------------------------\n");
 
 	
 								//close file - adding player details to file
@@ -300,6 +439,9 @@ public class Client
 							}
 							else if(message.equals("2")) {
 								//Club OPTIONS to search players for sale from their CLUB
+							    int i; 
+							    while ((i=fr.read()) != -1) 
+							      System.out.print((char) i); 
 							}
 							else if(message.equals("3")) {
 								//Club OPTIONS to SUSPEND/RESUME player from Club
@@ -321,9 +463,9 @@ public class Client
 	
 				
 				//TERMINATE OPTIONS
-//				System.out.println("Do you wish to continue ? (Y/N)");
-//				message = console.next();
-//				sendMessage(message);
+				System.out.println("Do you wish to continue ? (Y/N)");
+				message = console.next();
+				sendMessage(message);
 				
 			}while(message.equalsIgnoreCase("Y"));
 			
@@ -338,8 +480,6 @@ public class Client
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		}	
 	}
-	
 }
