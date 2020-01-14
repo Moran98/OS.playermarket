@@ -183,18 +183,13 @@ class Connecthandler extends Thread
 						//PLAYER SEARCH - Position
 						if(option.equals("1")) {
 							sendMessage("Enter player's Position you wish to SEARCH : \n 1)GOALKEEPER \n 2)DEFENDER \n 3)MIDFIELDER \n 4)FORWARD");
-							position = (String)in.readObject();
 						}
 						
 						//DISPLAY PLAYERS
 						if(option.equals("2")) {
 							sendMessage("DISPLAY PLAYERS FOR SALE");
 						}
-
-					}
-					
-					
-				
+					}	
 				}
 				
 				//REGISTER
@@ -249,12 +244,11 @@ class Connecthandler extends Thread
 						else if(option.equals("2")) {
 							sendMessage("Enter Player's ID that you wish to UPDATE : ");
 							pID = (String)in.readObject();
-							
 						}
 						else if(option.equals("3")) {
 							sendMessage("Enter Player's ID that you wish to DELETE : ");
-							pID = (String)in.readObject();						}
-						
+							pID = (String)in.readObject();				
+						}
 					}
 					
 					//register - club
@@ -298,9 +292,8 @@ class Connecthandler extends Thread
 				}
 				
 				//TERMINATE
-				message = (String)in.readObject();
+//				message = (String)in.readObject();
 			}while(message.equalsIgnoreCase("Y"));
-		
 		}
 		catch (IOException e) 
 		{

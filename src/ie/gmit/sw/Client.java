@@ -185,8 +185,6 @@ public class Client
 						//close file - adding player details to file
 						P1.flush();
 						P1.close();
-						
-						System.out.println("\n----------------------------------------------------------------------------------------------------------------------------------------\n");
 					}
 					
 					else if(message.equals("2")) {
@@ -220,7 +218,6 @@ public class Client
 					
 					//VERIFY LOGIN - TODO 
 					
-					System.out.println("\n----------------------------------------------------------------------------------------------------------------------------------------\n");
 					//Club Options
 					message = (String)in.readObject();
 					System.out.println(message);	
@@ -412,7 +409,6 @@ public class Client
 						message = console.next();
 						sendMessage(message);
 						C.append(message+" ");
-						System.out.println("FINISHED");
 						
 						C.append("\n------------------------------------------------------------\n");
 						//close
@@ -421,9 +417,7 @@ public class Client
 						
 						message = (String)in.readObject();
 						System.out.println(message);
-						
-						System.out.println("\n--------------------------------------------------------------------------------------\n");
-						
+												
 						//Club Options
 						message = (String)in.readObject();
 						System.out.println(message);	
@@ -440,8 +434,9 @@ public class Client
 							else if(message.equals("2")) {
 								//Club OPTIONS to search players for sale from their CLUB
 							    int i; 
-							    while ((i=fr.read()) != -1) 
-							      System.out.print((char) i); 
+							    while ((i=fr.read()) != -1) { 
+							      System.out.print((char) i);
+							    }
 							}
 							else if(message.equals("3")) {
 								//Club OPTIONS to SUSPEND/RESUME player from Club
@@ -463,9 +458,9 @@ public class Client
 	
 				
 				//TERMINATE OPTIONS
-				System.out.println("Do you wish to continue ? (Y/N)");
-				message = console.next();
-				sendMessage(message);
+//				System.out.println("Do you wish to continue ? (Y/N)");
+//				message = console.next();
+//				sendMessage(message);
 				
 			}while(message.equalsIgnoreCase("Y"));
 			
